@@ -82,7 +82,7 @@ var UIController = (function(){
 
 		addListItem: function(obj, type){
 			var html, newHtml, element;
-			
+
 			//Create Html strings with placeholder text
 			if(type === 'inc'){
 				element = DOMstrings.incomeContainer;
@@ -100,6 +100,18 @@ var UIController = (function(){
 
 			// Insert Html into dom
 			document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
+		},
+
+		clearFields: function(){
+			var fields, fieldsArr;
+
+			fields = document.querySelectorAll(DOMstrings.inputdescription + ', ' + DOMstrings.inputValue);
+
+			fieldsArr = Array.prototype.slice.call(fields);
+
+			fieldsArr.forEach( function(current, index) {
+				current.value = "";
+			});
 		},
  
 		getDOMstrings: function(){
@@ -138,6 +150,9 @@ var controller = (function(budgetCtrl, UICtrl){
 
 		// 3. Add the item to the UI
 		UICtrl.addListItem(newItem, input.type);
+
+		// Clear fileds to the UI
+		UICtrl.clearFields();
 
 		// 4. Calculate the budget
 
