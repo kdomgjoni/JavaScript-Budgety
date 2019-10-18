@@ -148,7 +148,8 @@ var UIController = (function(){
 		expensesLabel: '.budget__expenses--value',
 		percentageLabel: '.budget__expenses--percentage',
 		container: '.container',
-		expensesPercLabel: '.item__percentage'
+		expensesPercLabel: '.item__percentage',
+		dateLabel: '.budget__title--month'
 	};
 
 	var formatNumber = function(num, type){
@@ -253,6 +254,18 @@ var UIController = (function(){
 				}
 				
 			});
+		},
+
+		displayMonth: function(){
+			var month, months, now, year;
+
+			months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'September', 'October', 'November', 'December'];
+			now = new Date();
+			month = now.getMonth();
+			year = now.getFullYear();
+
+			document.querySelector(DOMstrings.dateLabel).textContent = months[month - 1] + ' ' + year;
+
 		},
 
  
@@ -361,6 +374,7 @@ var controller = (function(budgetCtrl, UICtrl){
 	return{
 		init: function(){
 			console.log('the app is working');
+			UICtrl.displayMonth();
 			setupEvenetListeners();
 
 			// 3. Display the budget on the UI
